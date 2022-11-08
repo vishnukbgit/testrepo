@@ -1,5 +1,6 @@
 mkdir -p ${WORKSPACE}/out
 chmod 777 ${WORKSPACE}/out
-cp swagger.json ${WORKSPACE}/out/swagger.json
-docker run -v ${WORKSPACE}/out:/zap/wrk/:rw owasp/zap2docker-weekly zap-api-scan.py -t swagger.json -f openapi -g gen.conf -r testreport.html 2> /dev/null; (($? == 2)) && echo 'Done' >&2
+SNYK_TOKEN="2286d438-4472-438c-9113-d6283e2c0a48"
+#cp swagger.json ${WORKSPACE}/out/swagger.json
+docker run --rm -it -e  SNYK_TOKEN='2286d438-4472-438c-9113-d6283e2c0a48' -v $(pwd):/app snyk/snyk:alpine snyk code test --json > results.json
 cp ${WORKSPACE}/out/testreport.html ${WORKSPACE}/testreport.html
