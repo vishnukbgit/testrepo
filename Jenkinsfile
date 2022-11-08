@@ -3,7 +3,6 @@ pipeline{
     stages {
         stage('Test in snyk') {
             steps {
-                cleanWs()
                  sh "./script.sh"
             }  
         }
